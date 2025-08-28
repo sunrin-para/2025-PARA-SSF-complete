@@ -3,8 +3,7 @@ from schemas import ResetResponse, PreferencesUpdateRequest, UpdateResponse
 from services import UserService
 
 router = APIRouter(
-    prefix="/user",
-    tags=["user"],
+    prefix="/user", tags=["user"],
     responses={404: {"description": "Not found"}},
 )
 

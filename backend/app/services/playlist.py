@@ -31,9 +31,7 @@ class Pipeline():
 
     def generate_keywords(self, preferences: Dict[str, List]):
         chat = self.parsed_chat(preferences, self.prompt_handler.keyword_prompt)
-        response = self.client.chat.completions.create(
-            model="gpt-4o-mini", messages=chat
-        )
+        response = self.client.chat.completions.create(model="gpt-4o-mini", messages=chat)
         return self.parsed_response(response.choices[0].message.content)
 
 class SpotifyHandler:
@@ -69,7 +67,9 @@ class SpotifyHandler:
                         'name': artist['name'],
                         'url': artist['external_urls']['spotify']
                     })
-                thumbnail = track["album"]["images"][0]["url"] if track["album"]["images"] else None
+                thumbnail = None
+                if track["album"]["images"]:
+                    thumbnail = track["album"]["images"][0]["url"]
                 tracks.append({
                     'id': track['id'],
                     'name': track['name'],
@@ -85,7 +85,7 @@ class PlaylistService():
         self.json_handler = JsonHandler("./data/playlist.json")
         self.pipeline = Pipeline()
 
-    def _collect_tracks_from_playlist(self, playlist, total_tracks, track_length):
+    def collect_tracks_from_playlist(self, playlist, total_tracks, track_length):
         if len(total_tracks) >= track_length:
             return False
 
@@ -125,49 +125,11 @@ class PlaylistService():
                 sources.extend(playlists)
 
                 for playlist in playlists:
-                    should_continue = self._collect_tracks_from_playlist(
-                        playlist, total_tracks, track_length
-                    )
+                    should_continue = self.collect_tracks_from_playlist(playlist, total_tracks, track_length)
                     if not should_continue:
                         break
 
             available_tracks = list(total_tracks.values())
-            selected_tracks = random.sample(available_tracks, min(track_length, len(available_tracks)))
-
-            playlist = {"tracks": selected_tracks, "sources": sources}
-            self.json_handler.write(playlist)
-
-            return playlist
-        except Exception as e:
-            raise Exception(str(e))
-
-    def generate_playlist_simple(self, track_length: int):
-        try:
-            sources = []
-            spotify_handler = SpotifyHandler()
-
-            preferences = JsonHandler("./data/preferences.json").read()
-            keywords = self.pipeline.generate_keywords(preferences)
-
-            all_playlists = []
-            for keyword in keywords:
-                playlists = spotify_handler.search_playlists(keyword)
-                all_playlists.extend(playlists)
-
-            sources = all_playlists
-
-            all_tracks = []
-            for playlist in all_playlists:
-                tracks = spotify_handler.get_tracks(playlist["id"])
-                all_tracks.extend(tracks)
-
-            track_dict = {}
-            for track in all_tracks:
-                if len(track_dict) >= track_length:
-                    break
-                track_dict[track["id"]] = track
-
-            available_tracks = list(track_dict.values())
             selected_tracks = random.sample(available_tracks, min(track_length, len(available_tracks)))
 
             playlist = {"tracks": selected_tracks, "sources": sources}

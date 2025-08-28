@@ -59,10 +59,6 @@ class ChatService():
         self.chat.append(message)
         return message
 
-    def generate_playlist(self):
-        self.add_message("system", "playlist")
-        self.save_chat()
-
     def get_functions(self, role: str, message: str, created_at: Optional[int] = None):
         try:
             self.add_message(role, message, created_at)
