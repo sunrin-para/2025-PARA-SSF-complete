@@ -1,0 +1,109 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Poetry
+poetry.lock
+dist/
+
+# Virtual environments
+venv/
+env/
+ENV/
+.venv/
+.env/
+myenv/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+.env.production
+.env.development
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.spyderproject
+.spyproject
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs
+*.log
+logs/
+run.log
+
+# Database
+*.db
+*.sqlite3
+*.sqlite
+
+# Cache
+.cache/
+.pytest_cache/
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Coverage reports
+.coverage
+htmlcov/
+.tox/
+.nox/
+
+# FastAPI specific
+.pytest_cache/
+
+# Project specific
+2025SSF
+pyrightconfig.json
+
+# API Keys and secrets (if stored in files)
+secrets.json
+config.json
+
+# Temporary files
+*.tmp
+*.temp
+
+# Node modules (if any frontend)
+node_modules/
+
+# Added
+.cache

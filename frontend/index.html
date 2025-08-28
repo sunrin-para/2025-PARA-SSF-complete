@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Music Playlist</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <div class="overlay"></div>
+        <aside class="sidebar">
+            <div class="sidebar__header">
+                <h2 class="sidebar__current-playlist-title">현재 플레이리스트</h2>
+            </div>
+            <div class="sidebar__playlist-detail">
+                <div class="sidebar__no-playlists">아직 생성된 플레이리스트가 없습니다.</div>
+            </div>
+            <div class="sidebar__footer">
+                <!-- TODO: change sidebar footer -->
+                <a href="https://sunrin-para.dev/" target="_blank" rel="noopener noreferrer" class="sidebar__logo-link">
+                    <svg width="112" height="116" viewBox="0 0 112 116" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <mask id="mask0_437_24" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="112" height="116">
+                            <path d="M111.575 0.5H0.0705872V115.735H111.575V0.5Z"/>
+                        </mask>
+                        <g mask="url(#mask0_437_24)">
+                            <path d="M51.1958 57.5291C52.2387 58.1305 53.5422 57.3789 53.5422 56.1764V2.06441C53.5422 0.861928 52.2387 0.110368 51.1958 0.711604L4.26144 27.7677C3.21849 28.3689 3.21847 29.872 4.26144 30.4733L51.1958 57.5291Z"/>
+                            <path d="M57.335 1.87013C57.335 0.816975 58.4785 0.158757 59.3925 0.685326L106.713 27.9355C107.627 28.4621 107.627 29.7787 106.713 30.3053L59.3925 57.5555C58.4785 58.082 57.335 57.4237 57.335 56.3708V1.87013Z"/>
+                            <path d="M0.0705872 34.666C0.0705872 33.4876 1.3503 32.751 2.37405 33.3402L71.4775 73.1081C72.5015 73.6974 72.5015 75.1702 71.4775 75.7592L2.37405 115.528C1.3503 116.117 0.0705872 115.38 0.0705872 114.202V34.666Z"/>
+                            <path d="M108.701 90.3529C109.978 91.088 111.575 90.1691 111.575 88.6986V34.9475C111.575 33.477 109.978 32.5579 108.701 33.2934L61.9996 60.1689C60.7222 60.904 60.7222 62.7421 61.9996 63.4772L108.701 90.3529Z"/>
+                        </g>
+                    </svg>
+                </a>
+            </div>
+        </aside>
+
+        <main class="chat-main-content">
+            <header class="chat-header">
+                <h1 class="chat-header__title">AI Music Playlist 🎧</h1>
+                <button class="chat-header__sidebar-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" height="30px" width="30px" viewBox="0 -960 960 960" fill="#e3e3e3">
+                        <path d="M640-160q-50 0-85-35t-35-85q0-50 35-85t85-35q11 0 21 1.5t19 6.5v-288q0-17 11.5-28.5T720-720h120q17 0 28.5 11.5T880-680q0 17-11.5 28.5T840-640h-80v360q0 50-35 85t-85 35ZM160-320q-17 0-28.5-11.5T120-360q0-17 11.5-28.5T160-400h240q17 0 28.5 11.5T440-360q0 17-11.5 28.5T400-320H160Zm0-160q-17 0-28.5-11.5T120-520q0-17 11.5-28.5T160-560h400q17 0 28.5 11.5T600-520q0 17-11.5 28.5T560-480H160Zm0-160q-17 0-28.5-11.5T120-680q0-17 11.5-28.5T160-720h400q17 0 28.5 11.5T600-680q0 17-11.5 28.5T560-640H160Z"/>
+                    </svg>
+                </button>
+            </header>
+
+            <div class="chat-messages" id="chat-messages">
+            </div>
+
+            <footer class="chat-input">
+                <input type="text" id="userInput" class="chat-input__field" placeholder="AI에게 말을 걸어보세요..." autocomplete="off">
+                <button type="button" id="sendBtn" class="chat-input__button">
+                    <svg class="send-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M5 11L12 4M12 4L19 11M12 4V21" stroke="currentColor"></path>
+                    </svg>
+                </button>
+            </footer>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
