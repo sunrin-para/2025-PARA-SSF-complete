@@ -10,6 +10,7 @@ class Pipeline():
         self.prompt_handler = PromptHandler()
 
     def build_chat_with_system(self, chat: List[Dict], system_prompt: str):
+        chat = [msg for msg in chat if msg["role"] != "system"]
         t = chat.pop()
         chat.append({"role": "system", "content": system_prompt})
         chat.append(t)
@@ -50,6 +51,17 @@ class ChatService():
     def save_chat(self):
         self.json_handler.write(self.chat)
 
+    def generate_playlist(self):
+        for i in range(len(self.chat)):
+            if self.chat[i]["role"] == "system" and self.chat[i]["content"] == "playlist_ui":
+                self.chat[i]["content"] = "generate_playlist"
+        self.chat.append({"role": "system", "content": "playlist_ui"})
+        self.save_chat()
+
+    def update_preferences(self):
+        self.chat.append({"role": "system", "content": "update_preferences"})
+        self.save_chat()
+
     def add_message(self, role: str, content: str, created_at: Optional[int] = None):
         message = {
             "role": role,
@@ -79,6 +91,7 @@ class ChatService():
 
     def get(self):
         try:
+            self.chat = self.json_handler.read()
             return self.chat
         except Exception as e:
             raise Exception(str(e))

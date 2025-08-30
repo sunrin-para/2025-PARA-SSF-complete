@@ -5,7 +5,7 @@
 가상환경 생성 및 활성화
 
 ```
-python -m venv
+python -m venv venv
 
 # Windows
 .\venv\Scripts\activate

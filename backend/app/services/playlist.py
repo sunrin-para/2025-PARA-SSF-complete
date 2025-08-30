@@ -59,25 +59,28 @@ class SpotifyHandler:
         tracks = []
         for item in response["items"]:
             if item["track"]:
-                track = item["track"]
-                artists = []
-                for artist in track['artists']:
-                    artists.append({
-                        'id': artist['id'],
-                        'name': artist['name'],
-                        'url': artist['external_urls']['spotify']
+                try:
+                    track = item["track"]
+                    artists = []
+                    for artist in track['artists']:
+                        artists.append({
+                            'id': artist['id'],
+                            'name': artist['name'],
+                            'url': artist['external_urls']['spotify']
+                        })
+                    thumbnail = None
+                    if track["album"]["images"]:
+                        thumbnail = track["album"]["images"][0]["url"]
+                    tracks.append({
+                        'id': track['id'],
+                        'name': track['name'],
+                        "url": track["external_urls"]["spotify"],
+                        'duration': track['duration_ms'],
+                        'artists': artists,
+                        "thumbnail": thumbnail
                     })
-                thumbnail = None
-                if track["album"]["images"]:
-                    thumbnail = track["album"]["images"][0]["url"]
-                tracks.append({
-                    'id': track['id'],
-                    'name': track['name'],
-                    "url": track["external_urls"]["spotify"],
-                    'duration': track['duration_ms'],
-                    'artists': artists,
-                    "thumbnail": thumbnail
-                })
+                except:
+                    continue
         return tracks
 
 class PlaylistService():
@@ -101,15 +104,6 @@ class PlaylistService():
 
     def generate_playlist(self, track_length: int):
         try:
-            chat_handler = JsonHandler("./data/chat.json")
-            chat = chat_handler.read()
-            chat.append({
-                "role": "system",
-                "content": "generate_playlist",
-                "created_at": int(time.time())
-            })
-            chat_handler.write(chat)
-
             sources = []
             total_tracks = {}
             spotify_handler = SpotifyHandler()

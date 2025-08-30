@@ -1,6 +1,7 @@
 from fastapi import APIRouter, HTTPException, Query
 from schemas import GetResponse, PlaylistResponse
 from services import PlaylistService
+from .chat import chat_service
 
 router = APIRouter(
     prefix="/playlist", tags=["playlist"],
@@ -13,6 +14,7 @@ playlist_service = PlaylistService()
 def generate_playlist(track_length: int = Query(default=20, description="생성할 트랙 개수", ge=1, le=100)):
     try:
         playlist = playlist_service.generate_playlist(track_length)
+        chat_service.generate_playlist()
         return PlaylistResponse(playlist=playlist)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
