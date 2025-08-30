@@ -10,7 +10,11 @@ class Pipeline():
         self.prompt_handler = PromptHandler()
 
     def build_chat_with_system(self, chat: List[Dict], system_prompt: str):
-        chat = [msg for msg in chat if msg["role"] != "system"]
+        new_chat = []
+        for msg in chat:
+            if msg["role"] != "system":
+                new_chat.append(msg)
+        chat = new_chat
         t = chat.pop()
         chat.append({"role": "system", "content": system_prompt})
         chat.append(t)
