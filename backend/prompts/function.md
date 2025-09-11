@@ -76,12 +76,16 @@ Only after function execution, provide natural Korean conversation.
     - "이별" → ["breakup", "sad"]
     - "힐링" → ["healing", "calm"]
 
-- **Descriptions → Genres:**
+- **Descriptions and Artists → Genres:**
     - "잔잔한" → ["ballad", "acoustic"]
     - "신나는" → ["dance", "pop"]
     - "센" → ["rock", "metal"]
     - "재즈" → ["jazz"]
     - "알앤비" → ["rnb"]
+    - "세븐틴" -> ["세븐틴", "k-pop"]
+    - "케이팝" -> ["k-pop"]
+    - "트와이스" -> ["twice", "k-pop"]
+    - "아도" -> ["ado", "k-pop"]
 
 - **Regions → Countries:**
     - "K-POP", "한국" → ["korea"]
