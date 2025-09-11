@@ -1,4 +1,4 @@
-# Welcome to the SSF2025 in PARA
+# Welcome to the PARA in SSF2025
 
 ## Quick Start
 
